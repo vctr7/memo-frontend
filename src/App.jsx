@@ -6,12 +6,7 @@ export default function App() {
   const [memos, setMemos] = useState([]);   // 메모 목록 상태
   const [text, setText] = useState("");     // 입력창 상태
 
-  // 컴포넌트 마운트 시 서버에서 메모 목록 불러오기
-  useEffect(() => {
-    loadMemos();
-  }, []);
-
-  // 목록 조회 (GET)
+  // 1. loadMemos 함수를 useEffect보다 먼저 선언합니다.
   const loadMemos = async () => {
     try {
       const res = await fetch(`${API_URL}/memos`);
@@ -21,6 +16,11 @@ export default function App() {
       console.error("메모를 불러오는 중 오류 발생:", error);
     }
   };
+
+  // 2. 선언된 loadMemos를 useEffect 내부에서 사용합니다.
+  useEffect(() => {
+    loadMemos();
+  }, []);
 
   // 메모 추가 (POST)
   const addMemo = async () => {
@@ -52,7 +52,6 @@ export default function App() {
     <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
       <h1>메모 앱</h1>
 
-      {/* 입력 영역 */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <input
           type="text"
@@ -66,7 +65,6 @@ export default function App() {
         </button>
       </div>
 
-      {/* 메모 목록 영역 */}
       <ul style={{ listStyle: "none", padding: 0 }}>
         {memos.map((memo) => (
           <li
