@@ -1,40 +1,85 @@
 import { useState, useEffect } from "react";
 
-// 백엔드 API 주소. 지금은 백엔드가 없으니 환경변수로만 준비해 둔다.
-// import.meta.env 는 Vite가 제공하는 환경변수 접근 객체.
-// VITE_ 로 시작하는 변수만 브라우저 코드에 노출된다(보안상 중요).
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export default function App() {
   const [memos, setMemos] = useState([]);   // 메모 목록 상태
-  const [text, setText] = useState("");      // 입력창 상태
+  const [text, setText] = useState("");     // 입력창 상태
 
-  // 1장에서는 백엔드가 없으므로 임시 데이터로 화면만 확인한다.
+  // 컴포넌트 마운트 시 서버에서 메모 목록 불러오기
   useEffect(() => {
-    setMemos([{ id: 1, content: "첫 번째 메모(임시 데이터)" }]);
+    loadMemos();
   }, []);
 
-  // 아래 함수들은 3장부터 실제 fetch 호출로 채운다.
-  const addMemo = () => {
-    if (!text.trim()) return;
-    setMemos([...memos, { id: Date.now(), content: text }]);
-    setText("");
+  // 목록 조회 (GET)
+  const loadMemos = async () => {
+    try {
+      const res = await fetch(`${API_URL}/memos`);
+      const data = await res.json();
+      setMemos(data);
+    } catch (error) {
+      console.error("메모를 불러오는 중 오류 발생:", error);
+    }
   };
-  const deleteMemo = (id) => setMemos(memos.filter((m) => m.id !== id));
+
+  // 메모 추가 (POST)
+  const addMemo = async () => {
+    if (!text.trim()) return;
+    try {
+      await fetch(`${API_URL}/memos`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: text }),
+      });
+      setText("");
+      loadMemos();
+    } catch (error) {
+      console.error("메모 추가 중 오류 발생:", error);
+    }
+  };
+
+  // 메모 삭제 (DELETE)
+  const deleteMemo = async (id) => {
+    try {
+      await fetch(`${API_URL}/memos/${id}`, { method: "DELETE" });
+      loadMemos();
+    } catch (error) {
+      console.error("메모 삭제 중 오류 발생:", error);
+    }
+  };
 
   return (
-    <div style={{ maxWidth: 480, margin: "40px auto", fontFamily: "sans-serif" }}>
-      <h1>📝 박지호의 메모장</h1>
-      <div style={{ display: "flex", gap: 8 }}>
-        <input value={text} onChange={(e) => setText(e.target.value)}
-          placeholder="메모를 입력하세요" style={{ flex: 1, padding: 8 }} />
-        <button onClick={addMemo}>추가</button>
+    <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
+      <h1>메모 앱</h1>
+
+      {/* 입력 영역 */}
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="메모를 입력하세요..."
+          style={{ flex: 1, padding: "8px" }}
+        />
+        <button onClick={addMemo} style={{ padding: "8px 16px" }}>
+          추가
+        </button>
       </div>
-      <ul>
-        {memos.map((m) => (
-          <li key={m.id}>
-            {m.content}
-            <button onClick={() => deleteMemo(m.id)} style={{ marginLeft: 8 }}>삭제</button>
+
+      {/* 메모 목록 영역 */}
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {memos.map((memo) => (
+          <li
+            key={memo.id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "10px",
+              borderBottom: "1px solid #ccc",
+            }}
+          >
+            <span>{memo.content}</span>
+            <button onClick={() => deleteMemo(memo.id)}>삭제</button>
           </li>
         ))}
       </ul>
