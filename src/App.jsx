@@ -70,7 +70,7 @@ export default function App() {
         <nav className="nav-links" aria-label="Main navigation"><a href="#story">Story</a><a href="#work">Work</a><a href="#guestbook">Guestbook</a></nav>
         <div className="header-meta">
           <a className="contact-link" href="#guestbook">Say hello <span>↗</span></a>
-          <small>Source: resume &amp; photo provided by Jeeho Park</small>
+          <small>출처: 삼성전자 삼성리서치 자기소개서 이력서.pdf</small>
         </div>
       </header>
 
