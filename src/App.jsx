@@ -43,7 +43,23 @@ export default function App() {
 
   // 2. 마운트 시 1회만 메모 목록 로드
   useEffect(() => {
-    loadMemos();
+    let ignore = false;
+
+    const fetchMemos = async () => {
+      try {
+        const res = await fetch(`${API_URL}/memos`);
+        const data = await res.json();
+        if (!ignore) setMemos(data);
+      } catch (error) {
+        console.error("메모 불러오기 실패:", error);
+      }
+    };
+
+    fetchMemos();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   // 3. 화면 UI 출력 (JSX return 추가)
