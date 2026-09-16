@@ -68,7 +68,10 @@ export default function App() {
       <header className="topbar">
         <a className="wordmark" href="#top" aria-label="Jeeho Park home">JP<span>.</span></a>
         <nav className="nav-links" aria-label="Main navigation"><a href="#story">Story</a><a href="#work">Work</a><a href="#guestbook">Guestbook</a></nav>
-        <a className="contact-link" href="#guestbook">Say hello <span>↗</span></a>
+        <div className="header-meta">
+          <a className="contact-link" href="#guestbook">Say hello <span>↗</span></a>
+          <small>Source: resume &amp; photo provided by Jeeho Park</small>
+        </div>
       </header>
 
       <main id="top">
