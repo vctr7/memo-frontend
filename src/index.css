@@ -37,6 +37,14 @@
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  :root { font-family: 'DM Sans', 'Helvetica Neue', sans-serif; color: #172321; background: #f1eee7; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; min-width: 320px; }
+  a { color: inherit; }
+  button, input { font: inherit; }
     --accent: #c084fc;
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
