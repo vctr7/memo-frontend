@@ -1,4 +1,4 @@
-:root { --ink: #172321; --muted: #77817a; --line: #cdd0c6; --acid: #d7ed62; --orange: #f16e4a; --serif: 'DM Serif Display', Georgia, serif; }
+:root { --ink: #172321; --muted: #77817a; --line: #cdd0c6; --acid: #d7ed62; --orange: #f16e4a; --paper: #f1eee7; --serif: 'DM Serif Display', Georgia, serif; }
 [data-theme="dark"] { --ink: #edf1e8; --muted: #a5afa5; --line: #3c4842; --acid: #c7df58; --orange: #ff987b; --paper: #172321; }
 .site-shell { max-width: 1240px; margin: 0 auto; padding: 0 48px; overflow: hidden; }
 .topbar { height: 92px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
@@ -12,7 +12,8 @@
 .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
 .header-meta small { color: var(--muted); font-size: 9px; letter-spacing: .04em; }
 .header-meta .visitor-count { color: var(--orange); }
-.theme-toggle { border: 1px solid var(--line); border-radius: 30px; background: transparent; color: var(--muted); cursor: pointer; font-size: 9px; letter-spacing: .06em; padding: 5px 9px; text-transform: uppercase; }
+.theme-toggle { position: fixed; right: 24px; bottom: 24px; z-index: 10; border: 1px solid var(--ink); border-radius: 30px; background: var(--ink); box-shadow: 0 8px 20px rgba(23, 35, 33, .18); color: var(--paper); cursor: pointer; font-size: 10px; font-weight: 600; letter-spacing: .06em; padding: 11px 15px; text-transform: uppercase; transition: background-color .25s ease, color .25s ease, transform .2s ease; }
+.theme-toggle:hover { transform: translateY(-2px); }
 .theme-toggle:hover { border-color: var(--orange); color: var(--orange); }
 .hero-section { min-height: 650px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 40px; padding: 112px 0 120px; }
 .eyebrow, .section-label, .project-type, .experience-date, .guestbook-form label { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
@@ -79,6 +80,7 @@ h3 { margin-bottom: 12px; color: var(--ink); font-family: var(--serif); font-siz
   .topbar { height: 72px; }
   .nav-links { display: none; }
   .header-meta small { display: none; }
+  .theme-toggle { right: 16px; bottom: 16px; }
   .hero-section { min-height: auto; display: block; padding: 82px 0 90px; }
   h1 { font-size: clamp(58px, 17vw, 88px); letter-spacing: -3px; }
   .hero-mark { width: 260px; margin: 70px auto 0; }
