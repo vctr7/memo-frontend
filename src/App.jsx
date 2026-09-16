@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import profileImage from "./assets/profile.jpg";
 
@@ -22,9 +22,14 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [visitorCount, setVisitorCount] = useState(null);
+  const hasRecordedVisit = useRef(false);
 
   useEffect(() => {
     let ignore = false;
+    if (hasRecordedVisit.current) return undefined;
+    hasRecordedVisit.current = true;
+
     const fetchGuestbook = async () => {
       try {
         const response = await fetch(`${API_URL}/memos`);
@@ -36,8 +41,22 @@ export default function App() {
       } finally {
         if (!ignore) setIsLoading(false);
       }
+
     };
+
+    const recordVisit = async () => {
+      try {
+        const response = await fetch(`${API_URL}/visits`, { method: "POST" });
+        if (!response.ok) throw new Error("방문자 수를 불러오지 못했습니다.");
+        const data = await response.json();
+        if (!ignore) setVisitorCount(data.count);
+      } catch (visitError) {
+        console.error(visitError.message);
+      }
+    };
+
     fetchGuestbook();
+    recordVisit();
     return () => { ignore = true; };
   }, []);
 
@@ -71,6 +90,7 @@ export default function App() {
         <div className="header-meta">
           <a className="contact-link" href="#guestbook">Say hello <span>↗</span></a>
           <small>출처: 삼성전자 삼성리서치 자기소개서 이력서.pdf</small>
+          <small className="visitor-count">Visitors: {visitorCount ?? "—"}</small>
         </div>
       </header>
 
