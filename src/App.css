@@ -1,4 +1,5 @@
 :root { --ink: #172321; --muted: #77817a; --line: #cdd0c6; --acid: #d7ed62; --orange: #f16e4a; --serif: 'DM Serif Display', Georgia, serif; }
+[data-theme="dark"] { --ink: #edf1e8; --muted: #a5afa5; --line: #3c4842; --acid: #c7df58; --orange: #ff987b; --paper: #172321; }
 .site-shell { max-width: 1240px; margin: 0 auto; padding: 0 48px; overflow: hidden; }
 .topbar { height: 92px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .wordmark { font-size: 25px; font-weight: 600; letter-spacing: -1.5px; text-decoration: none; }
@@ -11,13 +12,15 @@
 .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
 .header-meta small { color: var(--muted); font-size: 9px; letter-spacing: .04em; }
 .header-meta .visitor-count { color: var(--orange); }
+.theme-toggle { border: 1px solid var(--line); border-radius: 30px; background: transparent; color: var(--muted); cursor: pointer; font-size: 9px; letter-spacing: .06em; padding: 5px 9px; text-transform: uppercase; }
+.theme-toggle:hover { border-color: var(--orange); color: var(--orange); }
 .hero-section { min-height: 650px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 40px; padding: 112px 0 120px; }
 .eyebrow, .section-label, .project-type, .experience-date, .guestbook-form label { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
 .eyebrow { margin: 0 0 28px; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { max-width: 700px; margin-bottom: 28px; color: var(--ink); font-family: var(--serif); font-size: clamp(64px, 8vw, 112px); font-weight: 400; letter-spacing: -4px; line-height: .91; }
 h1 em, h2 em { color: var(--orange); font-weight: 400; }
-.hero-intro { max-width: 410px; color: #55625a; font-size: 16px; line-height: 1.8; }
+.hero-intro { max-width: 410px; color: var(--muted); font-size: 16px; line-height: 1.8; }
 .text-link { display: inline-flex; gap: 14px; align-items: center; margin-top: 28px; border-bottom: 1px solid var(--ink); font-size: 12px; font-weight: 600; letter-spacing: .08em; padding-bottom: 8px; text-decoration: none; text-transform: uppercase; }
 .text-link span { color: var(--orange); font-size: 18px; }
 .hero-mark { position: relative; width: min(360px, 90%); aspect-ratio: 4 / 5; justify-self: end; animation: float-in 1s ease both; }
@@ -31,7 +34,7 @@ h1 em, h2 em { color: var(--orange); font-weight: 400; }
 .statement-grid, .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 52px; }
 h2 { color: var(--ink); font-family: var(--serif); font-size: clamp(38px, 5vw, 67px); font-weight: 400; letter-spacing: -2px; line-height: .98; }
 h2 span { color: var(--muted); }
-.story-copy { max-width: 430px; padding-top: 6px; color: #5c6861; font-size: 15px; line-height: 1.9; }
+.story-copy { max-width: 430px; padding-top: 6px; color: var(--muted); font-size: 15px; line-height: 1.9; }
 .story-copy p + p { margin-top: 24px; }
 .section-heading-row { display: flex; justify-content: space-between; align-items: baseline; }
 .section-note { color: var(--muted); font-family: var(--serif); font-size: 17px; font-style: italic; }
@@ -41,7 +44,7 @@ h2 span { color: var(--muted); }
 .project-number { color: var(--orange); font-family: var(--serif); font-size: 22px; }
 .project-type { margin: 0 0 12px; }
 h3 { margin-bottom: 12px; color: var(--ink); font-family: var(--serif); font-size: 36px; font-weight: 400; letter-spacing: -1px; }
-.project-description { max-width: 650px; margin-bottom: 20px; color: #637067; font-size: 14px; line-height: 1.75; }
+.project-description { max-width: 650px; margin-bottom: 20px; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .tag-list { display: flex; gap: 7px; flex-wrap: wrap; }
 .tag-list span { border: 1px solid var(--line); border-radius: 30px; color: var(--muted); font-size: 10px; letter-spacing: .06em; padding: 5px 10px; text-transform: uppercase; }
 .project-arrow { color: var(--orange); font-size: 24px; }
@@ -50,10 +53,10 @@ h3 { margin-bottom: 12px; color: var(--ink); font-family: var(--serif); font-siz
 .experience-row, .education-note { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 22px; align-items: start; border-bottom: 1px solid var(--line); padding: 18px 0; font-size: 13px; }
 .experience-row strong, .education-note strong { display: block; color: var(--ink); font-weight: 600; }
 .experience-row div span, .education-note span { display: block; color: var(--muted); margin-top: 5px; }
-.experience-row p { margin: 0; color: #637067; }
+.experience-row p { margin: 0; color: var(--muted); }
 .guestbook-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; border-top: 1px solid var(--line); padding: 90px 0 120px; }
 .guestbook-intro h2 { margin-top: 48px; }
-.guestbook-intro > p:last-child { max-width: 330px; color: #637067; font-size: 14px; line-height: 1.8; }
+.guestbook-intro > p:last-child { max-width: 330px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .guestbook-panel { align-self: end; }
 .guestbook-form { border-bottom: 1px solid var(--ink); padding-bottom: 12px; }
 .guestbook-form label { display: block; margin-bottom: 12px; }
@@ -66,7 +69,7 @@ h3 { margin-bottom: 12px; color: var(--ink); font-family: var(--serif); font-siz
 .guestbook-list { max-height: 260px; overflow-y: auto; }
 .empty-message { color: var(--muted); font-family: var(--serif); font-size: 18px; font-style: italic; padding: 24px 0; }
 .guestbook-entry { display: flex; gap: 14px; align-items: baseline; border-bottom: 1px solid var(--line); padding: 16px 0; }
-.guestbook-entry p { margin: 0; color: #5c6861; font-size: 14px; line-height: 1.6; }
+.guestbook-entry p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 .entry-dot { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--orange); }
 .footer { display: flex; justify-content: space-between; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; letter-spacing: .1em; padding: 25px 0 35px; text-transform: uppercase; }
 .footer a { text-decoration: none; }

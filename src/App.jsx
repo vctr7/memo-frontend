@@ -23,7 +23,13 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [visitorCount, setVisitorCount] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem("portfolio-theme") || "light");
   const hasRecordedVisit = useRef(false);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     let ignore = false;
@@ -91,6 +97,9 @@ export default function App() {
           <a className="contact-link" href="#guestbook">Say hello <span>↗</span></a>
           <small>출처: 삼성전자 삼성리서치 자기소개서 이력서.pdf</small>
           <small className="visitor-count">Visitors: {visitorCount ?? "—"}</small>
+          <button className="theme-toggle" type="button" onClick={() => setTheme((currentTheme) => currentTheme === "light" ? "dark" : "light")} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+            {theme === "light" ? "Dark mode" : "Light mode"}
+          </button>
         </div>
       </header>
 
