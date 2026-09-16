@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import profileImage from "./assets/profile.jpg";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -78,7 +79,7 @@ export default function App() {
             <p className="hero-intro">안녕하세요, 박지호입니다. 복잡한 기술을 사용자의 경험으로 번역하는 소프트웨어 개발자이자 AI를 탐구하는 사람입니다.</p>
             <a className="text-link" href="#story">More about me <span>↓</span></a>
           </div>
-          <div className="hero-mark" aria-hidden="true"><div className="mark-ring ring-one" /><div className="mark-ring ring-two" /><div className="mark-core">P<br />J</div><span className="mark-caption">SEOUL · 2021 → NOW</span></div>
+          <div className="hero-mark"><img src={profileImage} alt="박지호 프로필 사진" /><span className="mark-caption">SEOUL · 2021 → NOW</span></div>
         </section>
 
         <section className="statement-section" id="story">
